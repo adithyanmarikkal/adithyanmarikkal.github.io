@@ -575,3 +575,146 @@
 .project-link:hover::after {
   transform: scaleX(1);
 }
+
+/* --- Responsive Design --- */
+@media screen and (max-width: 1024px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-list {
+    gap: 1.2rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
+
+  .nav-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+
+  .brand-signature {
+    font-size: 1.1em;
+  }
+
+  .hero-section {
+    flex-direction: column-reverse;
+    height: auto;
+    padding: 5rem 5% 3rem;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image-container {
+    justify-content: center;
+    height: auto;
+  }
+
+  .hero-image {
+    max-height: 300px;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+  }
+
+  .service-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .service-content {
+    align-items: center;
+  }
+
+  .tech-icons {
+    justify-content: center;
+  }
+
+  .service-list {
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .service-image-container {
+    justify-content: center;
+  }
+
+  .section-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .cards-container {
+    gap: 1.5rem;
+  }
+
+  .exploration-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .project-card {
+    max-width: 100%;
+  }
+
+  .projects-hero {
+    padding: 4rem 5% 2rem;
+  }
+
+  .projects-hero .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .animate-slide-left, .animate-slide-right, .animate-fade-in-up {
+    animation-duration: 1.5s; /* faster on mobile */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .nav-list {
+    gap: 0.8rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .hero-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
