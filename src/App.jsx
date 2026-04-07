@@ -175,11 +175,66 @@ function Home() {
 }
 
 function ProjectsPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="placeholder-page">
-      <h2>All Projects</h2>
-      <p>The complete portfolio of projects will be updated here later.</p>
-      <Link to="/" className="back-btn">← Back to Home</Link>
+    <div className="projects-page">
+      <nav className="navbar navbar-fixed">
+        <ul className="nav-list">
+          <li className="nav-item mr-auto">
+            <Link to="/" className="nav-link brand-signature">&lt;Adithyan Marikkal&gt;</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Home</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <section className="projects-hero">
+        <h1 className="hero-title">My <span className="brand-signature">Projects</span></h1>
+        <p className="hero-description">
+          A collection of my work in full-stack development, blockchain, and AI.
+        </p>
+      </section>
+
+      <div className="projects-page-grid-wrapper">
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <div 
+              key={project.id} 
+              className="project-card animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="project-image-wrapper">
+                <img src={project.image} alt={project.title} className="project-image" />
+              </div>
+              <div className="project-info">
+                <h4 className="project-title">{project.title}</h4>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="project-tag">{tag}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  {project.github && <a href={project.github} target="_blank" rel="noreferrer" className="project-link">GitHub</a>}
+                  {project.live && <a href={project.live} target="_blank" rel="noreferrer" className="project-link">Live Demo</a>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="back-to-home-container">
+        <Link to="/" className="back-btn">← Back to Home</Link>
+      </div>
+
+      <footer className="home-footer">
+        Made by ❤️ Adithyan Marikkal
+      </footer>
     </div>
   )
 }
