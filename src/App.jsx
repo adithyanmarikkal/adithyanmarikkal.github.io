@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import homepageImg from './assets/Homepage.webp';
 import webImg from './assets/web.png';
@@ -8,8 +8,8 @@ import { TbBrain } from 'react-icons/tb';
 import projects from './data/projects.js';
 
 const navLinks = [
-  { label: '<Adithyan Marikkal>', href: '#home', isBrand: true },
-  { label: 'Projects',  href: '/projects' },
+  { label: '<Adithyan Marikkal>', href: '/', isBrand: true },
+  { label: 'Projects',  href: '/#/projects' },
   { label: 'Resume',   href: 'https://drive.google.com/file/d/1giRAdAHv2i6E4U1UWrR-19QoNzBaLg_q/view?usp=sharing' },
   { label: 'GitHub',   href: 'https://github.com/adithyanmarikkal', target: '_blank' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adithyanmarikkal/', target: '_blank' },
