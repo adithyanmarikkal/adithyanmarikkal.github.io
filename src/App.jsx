@@ -3,17 +3,88 @@ import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import homepageImg from './assets/Homepage.webp';
 import webImg from './assets/web.png';
-import { SiSolidity } from 'react-icons/si';
+import { SiSolidity, SiReact, SiJavascript, SiTypescript, SiNodedotjs, SiMongodb, SiPostgresql, SiDocker } from 'react-icons/si';
 import { TbBrain } from 'react-icons/tb';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import projects from './data/projects.js';
 
 const navLinks = [
-  { label: '<Adithyan Marikkal>', href: '/', isBrand: true },
+  { label: 'Home', href: '/' },
   { label: 'Projects',  href: '/#/projects' },
   { label: 'Resume',   href: 'https://drive.google.com/file/d/1giRAdAHv2i6E4U1UWrR-19QoNzBaLg_q/view?usp=sharing' },
   { label: 'GitHub',   href: 'https://github.com/adithyanmarikkal', target: '_blank' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/adithyanmarikkal/', target: '_blank' },
 ]
+
+function Navbar({ isFixed = false }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
+  return (
+    <nav className={`navbar ${isFixed ? 'navbar-fixed' : ''}`}>
+      <div className="navbar-container">
+        <Link to="/" className="nav-brand brand-signature" onClick={() => setIsMenuOpen(false)}>
+          &lt;Adithyan Marikkal&gt;
+        </Link>
+
+        {/* Mobile Toggle Button */}
+        <button 
+          className="menu-toggle" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <HiX /> : <HiMenuAlt3 />}
+        </button>
+
+        <ul className={`nav-list ${isMenuOpen ? 'nav-list-mobile open' : ''}`}>
+          {navLinks.map((link, index) => (
+            <li key={index} className="nav-item">
+              {link.href.startsWith('/') ? (
+                link.href.startsWith('/#') ? (
+                  <a 
+                    href={link.href} 
+                    className="nav-link"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="link-text">{link.label}</span>
+                  </a>
+                ) : (
+                  <Link 
+                    to={link.href} 
+                    className="nav-link"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="link-text">{link.label}</span>
+                  </Link>
+                )
+              ) : (
+                <a 
+                  href={link.href} 
+                  target={link.target || '_self'} 
+                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
+                  className="nav-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="link-text">{link.label}</span>
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}
 
 function Home() {
   const serviceRef = useRef(null);
@@ -50,22 +121,7 @@ function Home() {
 
   return (
     <div className="app-container">
-      <nav className="navbar">
-        <ul className="nav-list">
-          {navLinks.map((link, index) => (
-            <li key={index} className="nav-item">
-              <a 
-                href={link.href} 
-                target={link.target || '_self'} 
-                rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                className="nav-link"
-              >
-                <span className={`link-text ${link.isBrand ? 'brand-signature' : ''}`}>{link.label}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <Navbar />
       <section id="home" className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">I'm <span className="brand-signature">Adithyan Marikkal</span></h1>
@@ -181,16 +237,7 @@ function ProjectsPage() {
 
   return (
     <div className="projects-page">
-      <nav className="navbar navbar-fixed">
-        <ul className="nav-list">
-          <li className="nav-item mr-auto">
-            <Link to="/" className="nav-link brand-signature">&lt;Adithyan Marikkal&gt;</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navbar isFixed={true} />
 
       <section className="projects-hero">
         <h1 className="hero-title">My <span className="brand-signature">Projects</span></h1>

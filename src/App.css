@@ -1,31 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
 
 .navbar {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   position: relative;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  text-decoration: none;
+  color: darkblue;
+  font-weight: 700;
+  z-index: 1001; /* Stay above mobile overlay */
 }
 
 .nav-list {
   display: flex;
-  justify-content: flex-start;
-  align-items:center;
   list-style: none;
   gap: 2.5rem;
   margin: 0;
   padding: 0;
 }
 
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: darkblue;
+  cursor: pointer;
+  z-index: 1001; /* Stay above mobile overlay */
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
 .nav-item {
   position: relative;
 }
 
-.nav-item:first-child {
-  margin-right: auto;
-}
+/* Item first-child margin removed as we use justify-between in container */
 
 .nav-link {
   text-decoration: none;
@@ -584,28 +614,46 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navbar {
-    padding: 1rem 1.5rem;
+  .menu-toggle {
+    display: block;
   }
 
   .nav-list {
-    gap: 1.2rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    display: none; /* Hide default list on mobile */
   }
 
-  .nav-list::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
+  .nav-list-mobile {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    padding: 8rem 2rem 4rem;
+    gap: 2rem;
+    text-align: center;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  .nav-link {
-    font-size: 1.1rem;
-    white-space: nowrap;
+  .nav-list-mobile.open {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-list-mobile .nav-link {
+    font-size: 2rem;
   }
 
   .brand-signature {
-    font-size: 1.1em;
+    font-size: 1.25em;
   }
 
   .hero-section {
